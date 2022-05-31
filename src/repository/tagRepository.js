@@ -28,6 +28,17 @@ const getTags = async (model) => {
     return null;
 }
 
+const removeTagById = async (id) => {
+    try {
+        const query = `delete from tags where id = ?`
+        return await getManager().query(query, [id])
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+    return null;
+}
+
 const getTagById = async (id) => {
     try {
         const query = `select * from tags where id = ?`
@@ -61,4 +72,4 @@ const getMostRated = async (title) => {
     }
 }
 
-export { savetag, getTags, getTagById, getMostRated, setVerified }
+export { savetag, getTags, getTagById, removeTagById, setVerified }

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import "reflect-metadata"
-import { getTagById, getTags, savetag } from '../../repository/tagRepository.js';
+import { getTagById, getTags, removeTagById, savetag } from '../../repository/tagRepository.js';
 
 const tagRouter = Router();
 
@@ -37,4 +37,14 @@ tagRouter.get('/:id', async (req, res) => {
   }
 });
 
+tagRouter.delete('/:id', async (req, res) => {
+  const id = req.params.id
+  try {
+    const tags = await removeTagById(id)
+    return res.status(200).send(tags);
+  } catch (error) {
+    console.log(error)
+    return res.status(500).send({status: false, msg: "Server Error, tente novamente"});
+  }
+});
 export default tagRouter;
