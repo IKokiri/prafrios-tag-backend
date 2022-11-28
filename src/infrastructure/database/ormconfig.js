@@ -1,4 +1,6 @@
+import dotenv from 'dotenv'
 const connectionOptions = () => {
+  dotenv.config()
   const devConfig = {
     type: process.env.TYPE,
     database: process.env.DATABASE,
